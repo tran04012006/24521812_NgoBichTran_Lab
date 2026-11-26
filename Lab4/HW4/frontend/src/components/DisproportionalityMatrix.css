@@ -1,0 +1,174 @@
+.matrix-container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.matrix-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.matrix-label {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.matrix-status {
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.matrix-status.over {
+  color: #fcd34d;
+  background: #78350f55;
+  border-color: #92400e;
+}
+
+.matrix-status.under {
+  color: #93c5fd;
+  background: #1e3a8a55;
+  border-color: #1d4ed8;
+}
+
+.matrix-status.balanced {
+  color: #86efac;
+  background: #14532d55;
+  border-color: #166534;
+}
+
+.matrix-status.neutral {
+  color: #cbd5e1;
+  background: #334155;
+  border-color: #475569;
+}
+
+.matrix-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.matrix-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.matrix-bar-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.matrix-bar-heading strong {
+  color: #f1f5f9;
+  font-size: 15px;
+}
+
+.matrix-track {
+  width: 100%;
+  height: 13px;
+  background: #263244;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.matrix-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+.observed-bar {
+  background: linear-gradient(
+    90deg,
+    #0891b2,
+    #22d3ee
+  );
+}
+
+.expected-bar {
+  background: #64748b;
+}
+
+.matrix-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.matrix-table thead {
+  background: #1e293b;
+}
+
+.matrix-table th {
+  padding: 14px 16px;
+  color: #94a3b8;
+  text-align: left;
+  font-weight: 600;
+}
+
+.matrix-table td {
+  padding: 14px 16px;
+  border-top: 1px solid #263244;
+  color: #cbd5e1;
+}
+
+.matrix-table th:last-child,
+.matrix-table td:last-child {
+  text-align: right;
+}
+
+.matrix-table td:last-child {
+  color: #67e8f9;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.matrix-table tbody tr:hover {
+  background: #1e293b;
+}
+
+.matrix-note {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .matrix-chart {
+    padding: 14px;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    padding: 12px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matrix-bar {
+    transition: none;
+  }
+}
