@@ -181,3 +181,44 @@ Task 6
     ├── Test expired deadline
     ├── Test server disconnection
     └── Verify ESLint and production build
+# Task 7: Final Integration, Verification & Cleanup
+
+Task 7
+├── 7.1. Backend verification
+│   ├── Verify Mongoose 8 version
+│   ├── Verify environment variable security
+│   ├── Verify GET /api/profiles
+│   ├── Verify POST /api/swipe
+│   ├── Verify GET /api/time
+│   └── Verify MongoDB persistence
+│
+├── 7.2. Frontend verification
+│   ├── Verify React 19 version
+│   ├── Verify Himass dossier route
+│   ├── Verify TanVuu dossier route
+│   ├── Verify derived matrix
+│   ├── Verify useMemo dependencies
+│   ├── Verify SLA countdown
+│   └── Verify Page Visibility API
+│
+├── 7.3. Automated testing
+│   ├── Test overrepresentation
+│   ├── Test underrepresentation
+│   ├── Test proportionate data
+│   ├── Test division by zero
+│   └── Test invalid and missing data
+│
+├── 7.4. Project cleanup
+│   ├── Remove unused starter files
+│   ├── Verify .gitignore
+│   ├── Verify environment configuration
+│   ├── Run ESLint
+│   └── Verify production build
+│
+└── 7.5. Documentation and submission
+    ├── Create README.md
+    ├── Document installation steps
+    ├── Document API endpoints
+    ├── Document frontend routes
+    ├── Verify Git commit count
+    └── Push final changes to GitHub
