@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, Route, Routes, useParams } from "react-router-dom";
+import AppealForm from "./AppealForm.jsx";
+import { AppealFormProvider } from "./AppealFormContext.jsx";
 
 const players = [
   { id: "himass", name: "Himass" },
@@ -19,7 +21,15 @@ function DossierPage() {
     );
   }
 
-  return <h2>{player.name} dossier</h2>;
+  return (
+    <>
+      <h2>{player.name} dossier</h2>
+
+      <AppealFormProvider key={player.id}>
+        <AppealForm />
+      </AppealFormProvider>
+    </>
+  );
 }
 
 export default function App() {
