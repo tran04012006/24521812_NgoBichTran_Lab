@@ -19,3 +19,11 @@ Task 2 — LIFO Undo
     ├── Derive the score from the current swipe history
     ├── Display the score while cards remain and after the deck ends
     └── Verify both swipe directions and score changes after Undo
+└── Task 4 — Full-stack persistence
+    ├── Add an Express API and a Mongoose 8 model
+    │   ├── Load the saved swipe history
+    │   └── Save history changes and detect stale updates
+    ├── Connect the React app to the API
+    │   ├── Load history on startup
+    │   └── Save each swipe and Undo
+    └── Verify state after reload and database restart
