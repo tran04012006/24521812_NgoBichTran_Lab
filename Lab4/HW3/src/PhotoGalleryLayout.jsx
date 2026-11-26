@@ -11,14 +11,15 @@ export default function PhotoGalleryLayout() {
   const lastOpenedPhotoId = useRef(null);
 
   const requestedCategory = searchParams.get('category');
-  const activeCategory = categories.some(({ id }) => id === requestedCategory)
-    ? requestedCategory
-    : '';
+  const activeFilter =
+    filters.find(({ id }) => id === requestedCategory) ?? filters[0];
 
-  const visiblePhotos = activeCategory
-    ? photos.filter((photo) => photo.category === activeCategory)
+  const visiblePhotos = activeFilter.id
+    ? photos.filter((photo) => photo.category === activeFilter.id)
     : photos;
 
+  const photoCount = visiblePhotos.length;
+  const photoCountLabel = photoCount === 1 ? 'photo' : 'photos';
   const selectedPhotoId = searchParams.get('photoId');
   const selectedPhoto = photos.find((photo) => photo.id === selectedPhotoId);
 
@@ -92,7 +93,7 @@ export default function PhotoGalleryLayout() {
             <li key={id}>
               <Link
                 to={getFilterLink(id)}
-                aria-current={id === activeCategory ? 'true' : undefined}
+                aria-current={id === activeFilter.id ? 'true' : undefined}
               >
                 {label}
               </Link>
@@ -100,6 +101,10 @@ export default function PhotoGalleryLayout() {
           ))}
         </ul>
       </nav>
+
+      <p className="gallery-status" role="status">
+        {activeFilter.label} · {photoCount} {photoCountLabel}
+      </p>
 
       <ul className="photo-grid" aria-label="Photos">
         {visiblePhotos.map((photo) => (
