@@ -3,6 +3,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import Profile from "./models/Profile.js";
+import Swipe from "./models/Swipe.js";
+
+import profileRoutes from "./routes/profile.routes.js";
+import swipeRoutes from "./routes/swipe.routes.js";
+
 dotenv.config();
 
 const app = express();
@@ -24,6 +30,7 @@ if (!process.env.MONGODB_URI) {
   throw new Error("MONGODB_URI missing");
 }
 
+// Health endpoint
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -31,12 +38,24 @@ app.get("/", (req, res) => {
   });
 });
 
-// Connect database before starting the server
+// API routes
+app.use("/api/profiles", profileRoutes);
+app.use("/api/swipe", swipeRoutes);
+
+// Initialize server
 async function startServer() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
 
     console.log("MongoDB connected successfully");
+
+    await Promise.all([
+      Profile.init(),
+      Swipe.init(),
+    ]);
+
+    console.log("Profile model initialized");
+    console.log("Swipe model initialized");
 
     app.listen(PORT, () => {
       console.log(
@@ -45,7 +64,7 @@ async function startServer() {
     });
   } catch (error) {
     console.error(
-      "MongoDB connection failed:",
+      "Server initialization failed:",
       error.message
     );
 

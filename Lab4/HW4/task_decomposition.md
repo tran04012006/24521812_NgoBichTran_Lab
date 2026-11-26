@@ -50,3 +50,31 @@ Task 2
     ├── Verify missing environment variable handling
     ├── Verify model initialization
     └── Check sensitive files are ignored by Git
+# Task 3: Backend API Implementation
+
+Task 3
+├── 3.1. Profile API
+│   ├── Create routes directory
+│   ├── Implement GET /api/profiles
+│   ├── Retrieve profiles using Mongoose
+│   ├── Optimize queries using .lean()
+│   └── Handle errors using try/catch
+│
+├── 3.2. Swipe API
+│   ├── Implement POST /api/swipe
+│   ├── Validate profileId
+│   ├── Validate swipe direction
+│   ├── Verify profile existence
+│   ├── Save swipe records to MongoDB
+│   └── Return appropriate HTTP status codes
+│
+├── 3.3. Sample data
+│   ├── Create Himass profile
+│   ├── Create TanVuu profile
+│   └── Implement database seed script
+│
+└── 3.4. Verification
+    ├── Test GET /api/profiles
+    ├── Test POST /api/swipe
+    ├── Test invalid requests
+    └── Verify database persistence
