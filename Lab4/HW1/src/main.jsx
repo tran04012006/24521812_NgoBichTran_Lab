@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { cards } from './cards.js';
+import './styles.css';
 
 const SWIPE_DISTANCE = 50;
 const POINTS_BY_DIRECTION = { left: -1, right: 2 };
@@ -127,52 +128,62 @@ function App() {
     }
   }
 
-  if (!deck) {
-    return (
-      <main>
-        <h1>Card Swipe Deck</h1>
-        <p role="status">{error || 'Loading deck…'}</p>
-      </main>
-    );
-  }
-
   return (
-    <main>
-      <h1>Card Swipe Deck</h1>
-      <p>Score: {score}</p>
-      {card ? (
-        <>
-          <p>Use the arrow keys or swipe the card left or right.</p>
-          <article
-            key={card.id}
-            style={{
-              touchAction: 'pan-y',
-              userSelect: 'none',
-              maxWidth: '22rem',
-              border: '1px solid',
-              borderRadius: '0.5rem',
-              padding: '1rem',
-            }}
-            onPointerDown={startSwipe}
-            onPointerUp={finishSwipe}
-            onPointerCancel={cancelSwipe}
-            onLostPointerCapture={cancelSwipe}
-          >
-            <h2>{card.name}</h2>
-            <p>{card.description}</p>
-          </article>
-        </>
+    <main className="deck">
+      <header className="deck-header">
+        <h1>Card Swipe Deck</h1>
+        {deck && (
+          <p className="score">
+            Score <strong>{score}</strong>
+          </p>
+        )}
+      </header>
+
+      {!deck ? (
+        <p className="notice" role={error ? 'alert' : 'status'}>
+          {error || 'Loading deck…'}
+        </p>
       ) : (
-        <p>No cards left.</p>
+        <>
+          {card ? (
+            <>
+              <article
+                key={card.id}
+                className="card"
+                onPointerDown={startSwipe}
+                onPointerUp={finishSwipe}
+                onPointerCancel={cancelSwipe}
+                onLostPointerCapture={cancelSwipe}
+              >
+                <p className="card-position">Card {directions.length + 1} of {cards.length}</p>
+                <h2>{card.name}</h2>
+                <p className="card-description">{card.description}</p>
+              </article>
+              <p className="hint">
+                Swipe the card or press <kbd>←</kbd> or <kbd>→</kbd>.
+              </p>
+            </>
+          ) : (
+            <p className="notice">No cards left.</p>
+          )}
+
+          <footer className="deck-footer">
+            <p className="status" role="status">
+              {isSaving && 'Saving…'}
+              {!isSaving && latestDirection && `Last swipe: ${latestCard.name} (${latestDirection}).`}
+            </p>
+            <button
+              className="undo"
+              type="button"
+              onClick={undo}
+              disabled={!latestDirection || isSaving}
+            >
+              Undo
+            </button>
+          </footer>
+          {error && <p className="error" role="alert">{error}</p>}
+        </>
       )}
-      <button type="button" onClick={undo} disabled={!latestDirection || isSaving}>
-        Undo
-      </button>
-      {error && <p role="alert">{error}</p>}
-      <p role="status">
-        {isSaving && 'Saving…'}
-        {!isSaving && latestDirection && `Last swipe: ${latestCard.name} (${latestDirection}).`}
-      </p>
     </main>
   );
 }
