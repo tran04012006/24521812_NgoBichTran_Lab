@@ -27,3 +27,7 @@ Task 2 — LIFO Undo
     │   ├── Load history on startup
     │   └── Save each swipe and Undo
     └── Verify state after reload and database restart
+└── Task 5 — Style the card deck
+    ├── Style the card, score badge, and Undo button
+    ├── Make the layout fit desktop and mobile screens
+    └── Verify swipe controls, Undo, and the production build
