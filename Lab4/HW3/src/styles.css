@@ -40,7 +40,8 @@ header nav {
   padding: 0.75rem var(--page-gutter);
 }
 
-header nav ul {
+header nav ul,
+.gallery-filters ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -49,7 +50,8 @@ header nav ul {
   list-style: none;
 }
 
-header nav a {
+header nav a,
+.gallery-filters a {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
@@ -61,12 +63,14 @@ header nav a {
   text-decoration: none;
 }
 
-header nav a:hover {
+header nav a:hover,
+.gallery-filters a:hover {
   background-color: #1c2a40;
   color: #fff;
 }
 
-header nav a[aria-current="page"] {
+header nav a[aria-current="page"],
+.gallery-filters a[aria-current="true"] {
   border-color: #4ca99f;
   background-color: #16343d;
   color: var(--accent);
@@ -114,4 +118,44 @@ main > a:hover {
 a:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 4px;
+}
+
+.gallery-filters {
+  margin-block: 1.5rem;
+}
+
+.gallery-filters a {
+  border-color: var(--border);
+  border-radius: 999px;
+  background-color: var(--surface);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photo-card {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  background-color: var(--surface);
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.photo-card figcaption {
+  padding: 0.875rem 1rem;
+  font-weight: 600;
 }
