@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -10,12 +11,18 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN
-      || "http://localhost:5173",
+    origin:
+      process.env.CLIENT_ORIGIN ||
+      "http://localhost:5173",
   })
 );
 
 app.use(express.json());
+
+// Environment variable security guard
+if (!process.env.MONGODB_URI) {
+  throw new Error("MONGODB_URI missing");
+}
 
 app.get("/", (req, res) => {
   res.json({
@@ -24,8 +31,26 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(
-    `Server is running at http://localhost:${PORT}`
-  );
-});
+// Connect database before starting the server
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    console.log("MongoDB connected successfully");
+
+    app.listen(PORT, () => {
+      console.log(
+        `Server is running at http://localhost:${PORT}`
+      );
+    });
+  } catch (error) {
+    console.error(
+      "MongoDB connection failed:",
+      error.message
+    );
+
+    process.exit(1);
+  }
+}
+
+startServer();
