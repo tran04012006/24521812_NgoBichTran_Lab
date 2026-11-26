@@ -1,52 +1,89 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-const cards = [
-  { id: 1, name: 'Linh', description: 'Plays badminton on weekends.' },
-  { id: 2, name: 'Minh', description: 'Enjoys cooking for friends.' },
-  { id: 3, name: 'An', description: 'Listens to podcasts on the bus.' },
-];
+import { cards } from './cards.js';
 
 const SWIPE_DISTANCE = 50;
 const POINTS_BY_DIRECTION = { left: -1, right: 2 };
 
 function App() {
-  const [{ queue, history }, setDeck] = useState({
-    queue: cards,
-    history: [],
-  });
+  const [deck, setDeck] = useState(null);
+  const [error, setError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const saving = useRef(false);
   const gesture = useRef(null);
-  const card = queue[0];
-  const latestSwipe = history.at(-1);
-  const score = history.reduce(
-    (total, { direction }) => total + POINTS_BY_DIRECTION[direction],
+
+  const directions = deck?.directions ?? [];
+  const card = cards[directions.length];
+  const latestDirection = directions.at(-1);
+  const latestCard = cards[directions.length - 1];
+  const score = directions.reduce(
+    (total, direction) => total + POINTS_BY_DIRECTION[direction],
     0,
   );
 
-  const swipe = useCallback((direction) => {
-    gesture.current = null;
-    setDeck((deck) => {
-      if (deck.queue.length === 0) return deck;
+  useEffect(() => {
+    const controller = new AbortController();
 
-      const [swipedCard, ...remainingCards] = deck.queue;
-      return {
-        queue: remainingCards,
-        history: [...deck.history, { card: swipedCard, direction }],
-      };
-    });
+    async function loadDeck() {
+      try {
+        const response = await fetch('/api/deck', { signal: controller.signal });
+        if (!response.ok) throw new Error('Could not load the deck.');
+
+        setDeck(await response.json());
+      } catch {
+        if (!controller.signal.aborted) {
+          setError('Could not load the deck. Check the server and reload.');
+        }
+      }
+    }
+
+    void loadDeck();
+    return () => controller.abort();
   }, []);
 
-  function undo() {
-    gesture.current = null;
-    setDeck((deck) => {
-      const lastSwipe = deck.history.at(-1);
-      if (!lastSwipe) return deck;
+  const saveDirections = useCallback(async (nextDirections) => {
+    if (!deck || saving.current) return;
 
-      return {
-        queue: [lastSwipe.card, ...deck.queue],
-        history: deck.history.slice(0, -1),
-      };
-    });
+    saving.current = true;
+    gesture.current = null;
+    setIsSaving(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/deck', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ directions: nextDirections, revision: deck.revision }),
+      });
+
+      if (response.status === 409) {
+        setDeck(await response.json());
+        setError('The deck changed in another tab. Try your action again.');
+        return;
+      }
+
+      if (!response.ok) throw new Error('Could not save the deck.');
+
+      setDeck(await response.json());
+    } catch {
+      setError('Could not confirm the save. Try your action again or reload.');
+    } finally {
+      saving.current = false;
+      setIsSaving(false);
+    }
+  }, [deck]);
+
+  const swipe = useCallback((direction) => {
+    if (!deck || deck.directions.length >= cards.length) return;
+
+    void saveDirections([...deck.directions, direction]);
+  }, [deck, saveDirections]);
+
+  function undo() {
+    if (directions.length > 0) {
+      void saveDirections(directions.slice(0, -1));
+    }
   }
 
   useEffect(() => {
@@ -64,7 +101,7 @@ function App() {
   }, [swipe]);
 
   function startSwipe(event) {
-    if (!event.isPrimary || event.button !== 0 || gesture.current) return;
+    if (!event.isPrimary || event.button !== 0 || gesture.current || saving.current) return;
 
     const { pointerId, clientX, clientY, currentTarget } = event;
     currentTarget.setPointerCapture(pointerId);
@@ -88,6 +125,15 @@ function App() {
     if (gesture.current?.pointerId === event.pointerId) {
       gesture.current = null;
     }
+  }
+
+  if (!deck) {
+    return (
+      <main>
+        <h1>Card Swipe Deck</h1>
+        <p role="status">{error || 'Loading deck…'}</p>
+      </main>
+    );
   }
 
   return (
@@ -119,11 +165,13 @@ function App() {
       ) : (
         <p>No cards left.</p>
       )}
-      <button type="button" onClick={undo} disabled={!latestSwipe}>
+      <button type="button" onClick={undo} disabled={!latestDirection || isSaving}>
         Undo
       </button>
+      {error && <p role="alert">{error}</p>}
       <p role="status">
-        {latestSwipe && `Last swipe: ${latestSwipe.card.name} (${latestSwipe.direction}).`}
+        {isSaving && 'Saving…'}
+        {!isSaving && latestDirection && `Last swipe: ${latestCard.name} (${latestDirection}).`}
       </p>
     </main>
   );
