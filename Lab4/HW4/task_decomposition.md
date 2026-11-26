@@ -78,3 +78,38 @@ Task 3
     ├── Test POST /api/swipe
     ├── Test invalid requests
     └── Verify database persistence
+# Task 4: Multi-Route Dossier Portal
+
+Task 4
+├── 4.1. Routing configuration
+│   ├── Configure BrowserRouter
+│   ├── Create FairPlayAppealPortal component
+│   ├── Configure homepage route
+│   ├── Configure Himass dossier route
+│   ├── Configure TanVuu dossier route
+│   └── Configure fallback route
+│
+├── 4.2. Shared components
+│   ├── Create Navbar component
+│   ├── Create Home component
+│   └── Create reusable DossierView component
+│
+├── 4.3. Backend integration
+│   ├── Configure API base URL
+│   ├── Fetch profiles from backend
+│   ├── Select profile by username
+│   ├── Handle loading state
+│   └── Handle API errors
+│
+├── 4.4. User interface
+│   ├── Style navigation bar
+│   ├── Style homepage
+│   ├── Style dossier cards
+│   └── Implement responsive CSS
+│
+└── 4.5. Verification
+    ├── Test homepage
+    ├── Test Himass route
+    ├── Test TanVuu route
+    ├── Test direct URL access
+    └── Verify backend integration
