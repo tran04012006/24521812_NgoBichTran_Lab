@@ -144,3 +144,40 @@ Task 5
     ├── Test missing data
     ├── Test division by zero
     └── Verify frontend build
+# Task 6: Zero-Drift Appeal SLA Countdown
+
+Task 6
+├── 6.1. Backend time synchronization
+│   ├── Implement GET /api/time
+│   ├── Return server timestamp
+│   └── Prevent cached time responses
+│
+├── 6.2. Custom countdown hook
+│   ├── Create hooks directory
+│   ├── Implement useAppealSlaTimer.js
+│   ├── Calculate server clock offset
+│   ├── Calculate remaining time from absolute timestamps
+│   ├── Implement visibilitychange listener
+│   ├── Resynchronize when tab becomes visible
+│   ├── Handle expired deadlines
+│   └── Clean up intervals and event listeners
+│
+├── 6.3. Countdown user interface
+│   ├── Create AppealSlaCountdown component
+│   ├── Display days, hours, minutes and seconds
+│   ├── Display synchronization status
+│   ├── Display deadline status
+│   └── Implement countdown CSS
+│
+├── 6.4. Integration
+│   ├── Integrate countdown into DossierView
+│   ├── Use profile appealDeadline
+│   └── Support both dossier routes
+│
+└── 6.5. Verification
+    ├── Test normal countdown
+    ├── Test switching browser tabs
+    ├── Test page refresh
+    ├── Test expired deadline
+    ├── Test server disconnection
+    └── Verify ESLint and production build

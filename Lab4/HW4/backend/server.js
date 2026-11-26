@@ -38,6 +38,15 @@ app.get("/", (req, res) => {
   });
 });
 
+// NEW: Server time synchronization endpoint
+app.get("/api/time", (req, res) => {
+  res.set("Cache-Control", "no-store");
+
+  res.status(200).json({
+    serverTime: Date.now(),
+  });
+});
+
 // API routes
 app.use("/api/profiles", profileRoutes);
 app.use("/api/swipe", swipeRoutes);
