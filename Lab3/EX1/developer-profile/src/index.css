@@ -1,0 +1,124 @@
+
+:root {
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 0;
+}
+
+body {
+  min-width: 0;
+  margin: 0;
+  line-height: 1.5;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Accessible keyboard focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-primary-hover);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* Preserve native focus visibility */
+a:focus:not(:focus-visible) {
+  outline: revert;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+main {
+  width: min(
+    calc(100% - 2 * var(--space-4)),
+    var(--card-max-width)
+  );
+  min-width: 0;
+  margin: var(--space-10) auto;
+}
+
+main > h1 {
+  margin: 0 0 var(--space-6);
+  color: var(--color-text-primary);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  main {
+    margin-block: var(--space-8);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  main {
+    width: calc(100% - 2 * var(--space-3));
+    margin-block: var(--space-4);
+  }
+
+  main > h1 {
+    margin-bottom: var(--space-4);
+    font-size: 1.5rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 359px) {
+  main {
+    width: calc(100% - 2 * var(--space-2));
+  }
+
+  main > h1 {
+    font-size: 1.375rem;
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
