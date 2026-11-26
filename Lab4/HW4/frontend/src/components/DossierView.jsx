@@ -17,6 +17,9 @@ import {
 import DisproportionalityMatrix from
   "./DisproportionalityMatrix.jsx";
 
+import AppealSlaCountdown from
+  "./AppealSlaCountdown.jsx";
+
 const EMPTY_DOSSIER = Object.freeze({});
 
 function DossierView({ user }) {
@@ -74,7 +77,7 @@ function DossierView({ user }) {
   const dossierData =
     profile?.dossierData ?? EMPTY_DOSSIER;
 
-  // Derived matrix computed during rendering
+  // Derived matrix
   const matrix = useMemo(
     () => computeMatrix(dossierData),
     [dossierData]
@@ -210,24 +213,10 @@ function DossierView({ user }) {
         <section className="content-card">
           <h2>Appeal SLA</h2>
 
-          <div className="info-row">
-            <span>Appeal deadline</span>
-
-            <strong>
-              {profile.appealDeadline
-                ? new Date(
-                    profile.appealDeadline
-                  ).toLocaleString()
-                : "Not available"}
-            </strong>
-          </div>
-
-          <div className="placeholder">
-            <p>
-              Live countdown will be
-              implemented in Task 6.
-            </p>
-          </div>
+          <AppealSlaCountdown
+            key={`${profile._id}-${profile.appealDeadline}`}
+            deadline={profile.appealDeadline}
+          />
         </section>
       </div>
     </main>
