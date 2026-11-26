@@ -21,3 +21,12 @@ Task 1 — Dynamic dossier routing
     ├── Mount the form inside each valid dossier
     │   └── Reset form state when playerID changes
     └── Verify validation, dossier navigation, and the production build
+└── Task 3 — Zero-drift countdown and CSS
+    ├── Build useAppealSlaTimer()
+    │   ├── Calculate time remaining from the deadline and system clock
+    │   ├── Update when the tab becomes visible again
+    │   └── Stop at zero and clean up on unmount
+    ├── Add the countdown to both dossiers
+    │   └── Keep the demo start time across same-tab refreshes
+    ├── Style the navigation, countdown, and appeal form
+    └── Verify refresh, expiry, mobile layout, and the production build
