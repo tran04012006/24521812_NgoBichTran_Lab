@@ -113,3 +113,34 @@ Task 4
     ├── Test TanVuu route
     ├── Test direct URL access
     └── Verify backend integration
+# Task 5: Disproportionality Derived Matrix
+
+Task 5
+├── 5.1. Matrix computation
+│   ├── Create utils directory
+│   ├── Implement computeMatrix function
+│   ├── Calculate observed and expected difference
+│   ├── Calculate disproportionality ratio
+│   ├── Calculate percentage deviation
+│   └── Handle missing data and division by zero
+│
+├── 5.2. Derived state implementation
+│   ├── Import useMemo
+│   ├── Compute matrix during rendering
+│   ├── Configure dossierData dependency
+│   └── Avoid redundant state and effects
+│
+├── 5.3. Matrix user interface
+│   ├── Create DisproportionalityMatrix component
+│   ├── Display calculated metrics
+│   ├── Display comparison chart
+│   ├── Display disproportionality status
+│   └── Configure matrix CSS
+│
+└── 5.4. Verification
+    ├── Verify Himass matrix
+    ├── Verify TanVuu matrix
+    ├── Verify recalculation when switching routes
+    ├── Test missing data
+    ├── Test division by zero
+    └── Verify frontend build
