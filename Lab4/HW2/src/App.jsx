@@ -73,9 +73,9 @@ function DossierPage() {
     <article className="panel dossier">
       <h2>{player.name} dossier</h2>
 
-      <AppealCountdown key={player.id} deadlineMs={deadlineMs} />
+      <AppealCountdown key={`countdown-${player.id}`} deadlineMs={deadlineMs} />
 
-      <AppealFormProvider key={player.id}>
+      <AppealFormProvider key={`form-${player.id}`}>
         <AppealForm />
       </AppealFormProvider>
     </article>
