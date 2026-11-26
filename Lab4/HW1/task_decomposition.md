@@ -31,3 +31,7 @@ Task 2 — LIFO Undo
     ├── Style the card, score badge, and Undo button
     ├── Make the layout fit desktop and mobile screens
     └── Verify swipe controls, Undo, and the production build
+Task 6 — Final verification
+├── Document how to run the React app, Express API, and MongoDB
+├── Add a regression test for swipe order, Undo, and score updates
+└── Add an API test that checks saved progress after an Express restart
