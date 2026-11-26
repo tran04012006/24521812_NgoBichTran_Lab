@@ -1,9 +1,23 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 import { Link } from "react-router-dom";
 
 import {
   getProfileByUsername,
 } from "../services/profileService.js";
+
+import {
+  computeMatrix,
+} from "../utils/computeMatrix.js";
+
+import DisproportionalityMatrix from
+  "./DisproportionalityMatrix.jsx";
+
+const EMPTY_DOSSIER = Object.freeze({});
 
 function DossierView({ user }) {
   const [result, setResult] = useState({
@@ -48,8 +62,23 @@ function DossierView({ user }) {
   }, [user]);
 
   const loading = result.user !== user;
-  const profile = result.profile;
-  const error = result.error;
+
+  const profile = loading
+    ? null
+    : result.profile;
+
+  const error = loading
+    ? ""
+    : result.error;
+
+  const dossierData =
+    profile?.dossierData ?? EMPTY_DOSSIER;
+
+  // Derived matrix computed during rendering
+  const matrix = useMemo(
+    () => computeMatrix(dossierData),
+    [dossierData]
+  );
 
   if (loading) {
     return (
@@ -59,7 +88,9 @@ function DossierView({ user }) {
 
           <h2>Loading dossier...</h2>
 
-          <p>Please wait while loading {user}.</p>
+          <p>
+            Please wait while loading {user}.
+          </p>
         </div>
       </main>
     );
@@ -71,7 +102,9 @@ function DossierView({ user }) {
         <div className="state-card error-card">
           <h2>Unable to load dossier</h2>
 
-          <p>{error || "Profile not found"}</p>
+          <p>
+            {error || "Profile not found"}
+          </p>
 
           <Link
             className="primary-button"
@@ -83,8 +116,6 @@ function DossierView({ user }) {
       </main>
     );
   }
-
-  const dossierData = profile.dossierData || {};
 
   return (
     <main className="page-container">
@@ -120,12 +151,18 @@ function DossierView({ user }) {
 
           <div className="info-row">
             <span>Display name</span>
-            <strong>{profile.displayName}</strong>
+
+            <strong>
+              {profile.displayName}
+            </strong>
           </div>
 
           <div className="info-row">
             <span>Username</span>
-            <strong>{profile.username}</strong>
+
+            <strong>
+              {profile.username}
+            </strong>
           </div>
 
           <div className="description-box">
@@ -146,7 +183,8 @@ function DossierView({ user }) {
               <span>Observed Count</span>
 
               <strong>
-                {dossierData.observedCount ?? "N/A"}
+                {dossierData.observedCount ??
+                  "N/A"}
               </strong>
             </div>
 
@@ -154,7 +192,8 @@ function DossierView({ user }) {
               <span>Expected Count</span>
 
               <strong>
-                {dossierData.expectedCount ?? "N/A"}
+                {dossierData.expectedCount ??
+                  "N/A"}
               </strong>
             </div>
           </div>
@@ -163,12 +202,9 @@ function DossierView({ user }) {
         <section className="content-card">
           <h2>Disproportionality Matrix</h2>
 
-          <div className="placeholder">
-            <p>
-              Derived matrix will be implemented
-              in Task 5.
-            </p>
-          </div>
+          <DisproportionalityMatrix
+            matrix={matrix}
+          />
         </section>
 
         <section className="content-card">
@@ -188,8 +224,8 @@ function DossierView({ user }) {
 
           <div className="placeholder">
             <p>
-              Live countdown will be implemented
-              in Task 6.
+              Live countdown will be
+              implemented in Task 6.
             </p>
           </div>
         </section>
