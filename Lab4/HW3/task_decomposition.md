@@ -1,13 +1,10 @@
-Task 1 — Set up the multi-route gallery SPA
-├── 1. Set up the project
-│   ├── Configure React 19, React Router v7, and Vite
-│   └── Add the HTML entry point and React root
-├── 2. Implement routing
-│   ├── Add shared navigation with Home and Gallery links
-│   ├── Render the home page at /
-│   ├── Render PhotoGalleryLayout at /gallery
-│   └── Render a fallback page for unknown URLs
-└── 3. Verify the setup
-    ├── Navigate between Home and Gallery
-    ├── Open /gallery directly and refresh
-    └── Run the production build
+Task 1 — Add app styling
+├── Create src/styles.css
+│   ├── Define the dark theme and base typography
+│   ├── Style the navigation and active route
+│   ├── Style the main content and page action links
+│   └── Add responsive spacing and visible keyboard focus
+├── Import the stylesheet in src/main.jsx
+└── Verify the layout on desktop and mobile
+    ├── Check the active route on Home and Gallery
+    └── Tab through the links and check their focus indicators
