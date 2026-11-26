@@ -8,6 +8,7 @@ const cards = [
 ];
 
 const SWIPE_DISTANCE = 50;
+const POINTS_BY_DIRECTION = { left: -1, right: 2 };
 
 function App() {
   const [{ queue, history }, setDeck] = useState({
@@ -17,6 +18,10 @@ function App() {
   const gesture = useRef(null);
   const card = queue[0];
   const latestSwipe = history.at(-1);
+  const score = history.reduce(
+    (total, { direction }) => total + POINTS_BY_DIRECTION[direction],
+    0,
+  );
 
   const swipe = useCallback((direction) => {
     gesture.current = null;
@@ -88,6 +93,7 @@ function App() {
   return (
     <main>
       <h1>Card Swipe Deck</h1>
+      <p>Score: {score}</p>
       {card ? (
         <>
           <p>Use the arrow keys or swipe the card left or right.</p>
