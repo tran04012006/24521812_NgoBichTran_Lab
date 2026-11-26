@@ -1,3 +1,10 @@
+export const THUMBNAIL_WIDTHS = [320, 480, 640];
+export const LIGHTBOX_WIDTH = 1280;
+
+export function getPhotoFilename(photoId, width) {
+  return `${photoId}-${width}.webp`;
+}
+
 export const categories = [
   { id: 'nature', label: 'Nature' },
   { id: 'architecture', label: 'Architecture' },

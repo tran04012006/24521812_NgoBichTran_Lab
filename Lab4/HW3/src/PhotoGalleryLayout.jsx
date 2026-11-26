@@ -1,8 +1,32 @@
 import { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { categories, photos } from './photos.js';
+import {
+  categories,
+  getPhotoFilename,
+  LIGHTBOX_WIDTH,
+  photos,
+  THUMBNAIL_WIDTHS,
+} from './photos.js';
 
 const filters = [{ id: '', label: 'All photos' }, ...categories];
+const fallbackThumbnailWidth = THUMBNAIL_WIDTHS.at(-1);
+const thumbnailSizes = [
+  '(min-width: 70rem) 16rem',
+  '(min-width: 65rem) 25vw',
+  '(min-width: 48rem) 33vw',
+  '(min-width: 32rem) 50vw',
+  'calc(100vw - 2rem)',
+].join(', ');
+
+function getPhotoAssetUrl(photoId, width) {
+  return `${import.meta.env.BASE_URL}photos/${getPhotoFilename(photoId, width)}`;
+}
+
+function getThumbnailSrcSet(photoId) {
+  return THUMBNAIL_WIDTHS.map(
+    (width) => `${getPhotoAssetUrl(photoId, width)} ${width}w`,
+  ).join(', ');
+}
 
 export default function PhotoGalleryLayout() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -107,7 +131,7 @@ export default function PhotoGalleryLayout() {
       </p>
 
       <ul className="photo-grid" aria-label="Photos">
-        {visiblePhotos.map((photo) => (
+        {visiblePhotos.map((photo, index) => (
           <li key={photo.id}>
             <Link
               id={`gallery-photo-${photo.id}`}
@@ -118,10 +142,13 @@ export default function PhotoGalleryLayout() {
             >
               <figure className="photo-card">
                 <img
-                  src={`${photo.imageUrl}?auto=format&fit=crop&w=640&h=480&q=75`}
+                  src={getPhotoAssetUrl(photo.id, fallbackThumbnailWidth)}
+                  srcSet={getThumbnailSrcSet(photo.id)}
+                  sizes={thumbnailSizes}
                   alt={photo.alt}
                   width={640}
                   height={480}
+                  fetchPriority={index === 0 && !selectedPhoto ? 'high' : 'auto'}
                 />
                 <figcaption>{photo.title}</figcaption>
               </figure>
@@ -151,8 +178,9 @@ export default function PhotoGalleryLayout() {
 
             <img
               className="photo-dialog-image"
-              src={`${selectedPhoto.imageUrl}?auto=format&w=1280&q=80`}
+              src={getPhotoAssetUrl(selectedPhoto.id, LIGHTBOX_WIDTH)}
               alt={selectedPhoto.alt}
+              fetchPriority="high"
             />
           </>
         )}

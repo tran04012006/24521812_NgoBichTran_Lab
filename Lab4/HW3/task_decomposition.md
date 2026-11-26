@@ -27,3 +27,9 @@ Task 1 — Add app styling
     ├── Move focus to the main content after a page change
     ├── Announce the gallery category and result count
     └── Check keyboard navigation, screen-reader output, and zoom
+└── Task 5 — Optimize images and run Lighthouse
+    ├── Prepare local WebP thumbnails and lightbox images
+    ├── Serve responsive thumbnails with srcSet and sizes
+    ├── Prioritize the first thumbnail or deep-linked lightbox image
+    ├── Verify images and deep links in the production preview
+    └── Measure the Lighthouse Performance score
