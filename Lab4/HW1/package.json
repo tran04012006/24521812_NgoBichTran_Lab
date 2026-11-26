@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "server": "node --env-file-if-exists=.env server.js"
   },
   "dependencies": {
+    "express": "5.1.0",
+    "mongoose": "8.21.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
