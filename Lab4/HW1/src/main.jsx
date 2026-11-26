@@ -10,21 +10,39 @@ const cards = [
 const SWIPE_DISTANCE = 50;
 
 function App() {
-  const [{ queue, lastDirection }, setDeck] = useState({
+  const [{ queue, history }, setDeck] = useState({
     queue: cards,
-    lastDirection: null,
+    history: [],
   });
   const gesture = useRef(null);
   const card = queue[0];
+  const latestSwipe = history.at(-1);
 
   const swipe = useCallback((direction) => {
     gesture.current = null;
     setDeck((deck) => {
       if (deck.queue.length === 0) return deck;
 
-      return { queue: deck.queue.slice(1), lastDirection: direction };
+      const [swipedCard, ...remainingCards] = deck.queue;
+      return {
+        queue: remainingCards,
+        history: [...deck.history, { card: swipedCard, direction }],
+      };
     });
   }, []);
+
+  function undo() {
+    gesture.current = null;
+    setDeck((deck) => {
+      const lastSwipe = deck.history.at(-1);
+      if (!lastSwipe) return deck;
+
+      return {
+        queue: [lastSwipe.card, ...deck.queue],
+        history: deck.history.slice(0, -1),
+      };
+    });
+  }
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -95,7 +113,12 @@ function App() {
       ) : (
         <p>No cards left.</p>
       )}
-      <p role="status">{lastDirection && `Swiped ${lastDirection}.`}</p>
+      <button type="button" onClick={undo} disabled={!latestSwipe}>
+        Undo
+      </button>
+      <p role="status">
+        {latestSwipe && `Last swipe: ${latestSwipe.card.name} (${latestSwipe.direction}).`}
+      </p>
     </main>
   );
 }
