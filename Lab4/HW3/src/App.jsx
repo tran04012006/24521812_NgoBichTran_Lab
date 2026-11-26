@@ -1,19 +1,64 @@
-import { Link, NavLink, Outlet, Route, Routes } from 'react-router';
+import { useEffect, useRef } from 'react';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+} from 'react-router';
 import PhotoGalleryLayout from './PhotoGalleryLayout.jsx';
+import './accessibility.css';
 
 function SiteLayout() {
+  const { pathname } = useLocation();
+  const homeMatch = useMatch('/');
+  const galleryMatch = useMatch('/gallery');
+  const mainRef = useRef(null);
+  const previousPathname = useRef(pathname);
+
+  let pageTitle = 'Page not found';
+
+  if (homeMatch) {
+    pageTitle = 'Home';
+  } else if (galleryMatch) {
+    pageTitle = 'Gallery';
+  }
+
+  useEffect(() => {
+    document.title = `${pageTitle} | Photo & Evidence Gallery`;
+  }, [pageTitle]);
+
+  useEffect(() => {
+    if (previousPathname.current !== pathname) {
+      previousPathname.current = pathname;
+      mainRef.current?.focus();
+    }
+  }, [pathname]);
+
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+
       <header>
         <nav aria-label="Main navigation">
           <ul>
-            <li><NavLink to="/" end>Home</NavLink></li>
-            <li><NavLink to="/gallery">Gallery</NavLink></li>
+            <li>
+              <NavLink to="/" end>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/gallery">Gallery</NavLink>
+            </li>
           </ul>
         </nav>
       </header>
 
-      <main>
+      <main id="main-content" ref={mainRef} tabIndex={-1}>
         <Outlet />
       </main>
     </>

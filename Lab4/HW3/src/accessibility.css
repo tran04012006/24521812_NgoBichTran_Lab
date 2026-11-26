@@ -1,0 +1,29 @@
+.skip-link {
+  position: fixed;
+  z-index: 1;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--accent);
+  color: #09252c;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+#main-content:focus-visible {
+  outline-offset: -4px;
+}
+
+main > .gallery-status {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}

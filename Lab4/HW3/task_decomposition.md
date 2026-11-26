@@ -21,3 +21,9 @@ Task 1 — Add app styling
     ├── Restore keyboard focus when the dialog closes
     ├── Style the lightbox for desktop and mobile
     └── Verify direct links, refresh, and browser history
+└── Task 4 — Improve and verify accessibility
+    ├── Add a visible-on-focus skip link
+    ├── Set a browser title for each route
+    ├── Move focus to the main content after a page change
+    ├── Announce the gallery category and result count
+    └── Check keyboard navigation, screen-reader output, and zoom
