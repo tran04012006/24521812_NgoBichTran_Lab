@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+      default-src 'none';
+      script-src 'self';
+      style-src 'self';
+      img-src 'self';
+      font-src 'self';
+      connect-src 'self';
+      object-src 'none';
+      base-uri 'none';
+      form-action 'self';
+    "
+    />
+    <title>Developer Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="./js/main.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+
+        <button type="button" id="theme-toggle">Toggle theme</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h1>Developer Portfolio</h1>
+        <p>Welcome to my developer portfolio.</p>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+      </section>
+
+      <button type="button" id="openModal" aria-haspopup="dialog">
+        Open Login
+      </button>
+
+      <dialog id="loginModal" aria-labelledby="loginTitle">
+        <h2 id="loginTitle">Login</h2>
+
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          autofocus
+        />
+
+        <button type="button" id="closeModal">Close</button>
+      </dialog>
+    </main>
+
+    <footer>
+      <p>© 2026 Developer Portfolio</p>
+    </footer>
+  </body>
+</html>
