@@ -14,3 +14,10 @@ Task 1 — Add app styling
     ├── Render category links and highlight the active filter
     ├── Display matching photos in a responsive grid
     └── Verify direct links, refresh, and browser history
+└── Task 3 — Add the native photo lightbox
+    ├── Add a shareable photo link to each gallery card
+    ├── Use photoId to open the matching photo in an HTML dialog
+    ├── Remove photoId on Close or Escape and preserve the category
+    ├── Restore keyboard focus when the dialog closes
+    ├── Style the lightbox for desktop and mobile
+    └── Verify direct links, refresh, and browser history
