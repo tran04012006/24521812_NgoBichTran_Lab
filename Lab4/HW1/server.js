@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { cards } from './src/cards.js';
 
 const DECK_ID = 'default';
+const port = Number(process.env.PORT ?? 3001);
 const mongoUri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/card_swipe_deck';
 
 const deckSchema = new mongoose.Schema({
@@ -55,13 +56,15 @@ app.put('/api/deck', async (req, res) => {
 
 app.use(express.static(fileURLToPath(new URL('./dist', import.meta.url))));
 
-await mongoose.connect(mongoUri);
+await mongoose.connect(mongoUri, { dbName: process.env.MONGODB_DB });
 await Deck.updateOne(
   { _id: DECK_ID },
   { $setOnInsert: { directions: [], revision: 0 } },
   { upsert: true },
 );
 
-app.listen(3001, '127.0.0.1', () => {
-  console.log('Card Swipe Deck API is running at http://127.0.0.1:3001');
+const server = app.listen(port, '127.0.0.1', () => {
+  const activePort = server.address().port;
+  console.log(`Card Swipe Deck API is running at http://127.0.0.1:${activePort}`);
+  process.send?.(activePort);
 });

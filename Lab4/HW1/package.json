@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "server": "node --env-file-if-exists=.env server.js"
+    "server": "node --env-file-if-exists=.env server.js",
+    "test": "npm run build && node --test test/*.test.js"
   },
   "dependencies": {
     "express": "5.1.0",
@@ -15,6 +16,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "playwright": "1.62.1",
     "vite": "7.3.1"
   }
 }
