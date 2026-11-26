@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Countdown</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Web Development Workshop</h1>
+      <p>Event starts in:</p>
+
+      <section class="countdown" aria-label="Time remaining">
+        <div class="time-box">
+          <span id="days">00</span>
+          <p>Days</p>
+        </div>
+
+        <div class="time-box">
+          <span id="hours">00</span>
+          <p>Hours</p>
+        </div>
+
+        <div class="time-box">
+          <span id="minutes">00</span>
+          <p>Minutes</p>
+        </div>
+
+        <div class="time-box">
+          <span id="seconds">00</span>
+          <p>Seconds</p>
+        </div>
+      </section>
+
+      <section class="registration">
+        <h2>Event Registration</h2>
+
+        <form id="registration-form">
+          <label for="full-name">Full Name</label>
+          <input id="full-name" type="text" name="fullName" required />
+
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required />
+
+          <button id="submit-btn" type="submit">Register Now</button>
+        </form>
+
+        <p id="form-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <p id="form-message" role="status" aria-live="polite"></p>
+
+      <p id="welcome-message"></p>
+    </main>
+  </body>
+</html>
