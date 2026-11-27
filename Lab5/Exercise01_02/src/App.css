@@ -1,6 +1,5 @@
 .app {
   min-height: 100dvh;
-
   display: flex;
   flex-direction: column;
 
@@ -8,7 +7,9 @@
   color: var(--text-primary);
 }
 
-/* Header */
+/* =========================
+   Header
+========================= */
 
 .app-header {
   display: flex;
@@ -52,11 +53,12 @@
 
   font-size: 12px;
   font-weight: 700;
-
   white-space: nowrap;
 }
 
-/* Main content */
+/* =========================
+   Main Content
+========================= */
 
 .app-content {
   flex: 1;
@@ -90,17 +92,17 @@
 
 .welcome-card h2 {
   font-size: clamp(24px, 4vw, 36px);
-
   margin: 12px 0;
 }
 
 .welcome-card > p {
   color: var(--text-secondary);
-
   max-width: 750px;
 }
 
-/* Application state cards */
+/* =========================
+   State Cards
+========================= */
 
 .exercise-grid {
   display: grid;
@@ -111,7 +113,6 @@
   );
 
   gap: 20px;
-
   margin-top: 32px;
 }
 
@@ -133,23 +134,22 @@
 
 .exercise-card h3 {
   margin: 10px 0;
-
   font-size: 20px;
 }
 
 .exercise-card p {
   color: var(--text-secondary);
-
   font-size: 14px;
 }
 
 .exercise-card strong {
   color: var(--text-primary);
-
   text-transform: capitalize;
 }
 
-/* Action buttons */
+/* =========================
+   Action Buttons
+========================= */
 
 .action-button {
   min-width: 44px;
@@ -196,11 +196,12 @@
 .tab-actions {
   display: flex;
   flex-wrap: wrap;
-
   gap: 12px;
 }
 
-/* State preview */
+/* =========================
+   State Preview
+========================= */
 
 .state-panel {
   margin-top: 28px;
@@ -214,13 +215,11 @@
 
 .state-panel h3 {
   margin-bottom: 16px;
-
   font-size: 16px;
 }
 
 .state-panel pre {
   margin: 0;
-
   overflow-x: auto;
 
   color: var(--code-color);
@@ -230,7 +229,9 @@
   line-height: 1.8;
 }
 
-/* Active tab content */
+/* =========================
+   Tab Content
+========================= */
 
 .tab-content {
   margin-top: 28px;
@@ -244,7 +245,6 @@
 
 .tab-content h3 {
   margin: 12px 0;
-
   font-size: 22px;
 }
 
@@ -255,7 +255,278 @@
   line-height: 1.7;
 }
 
-/* Footer */
+/* =========================
+   Evidence Container
+========================= */
+
+.evidence-container {
+  margin-top: 28px;
+}
+
+.evidence-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.evidence-toolbar h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.evidence-count {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 12px;
+
+  background: var(--bg-badge);
+  color: var(--accent-color);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pagination-summary {
+  margin-bottom: 16px;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* =========================
+   Evidence Grid
+========================= */
+
+.evidence-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 1fr)
+  );
+
+  gap: 18px;
+}
+
+/* =========================
+   Evidence Card
+========================= */
+
+.evidence-card {
+  min-width: 0;
+
+  background: var(--bg-secondary);
+
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.evidence-card:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--accent-color);
+
+  box-shadow:
+    0 8px 20px var(--shadow-color);
+}
+
+.evidence-thumbnail {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  aspect-ratio: 16 / 9;
+
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e3a5f
+  );
+}
+
+.play-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  padding-left: 3px;
+
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+
+  font-size: 20px;
+}
+
+.clip-duration {
+  position: absolute;
+
+  right: 10px;
+  bottom: 10px;
+
+  padding: 4px 8px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+
+  border-radius: 5px;
+
+  font-size: 11px;
+}
+
+.evidence-card-body {
+  padding: 16px;
+}
+
+.clip-category {
+  color: var(--accent-color);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.evidence-card h4 {
+  margin: 10px 0 6px;
+
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.evidence-card p {
+  margin-bottom: 14px;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.clip-id {
+  color: var(--text-muted);
+
+  font-family: Consolas, monospace;
+  font-size: 11px;
+}
+
+/* =========================
+   Pagination
+========================= */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  gap: 16px;
+
+  margin-top: 28px;
+  padding-top: 24px;
+
+  border-top: 1px solid var(--border-color);
+}
+
+.pagination-button {
+  min-width: 44px;
+  min-height: 44px;
+
+  padding: 10px 18px;
+
+  background: var(--bg-button);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background: var(--accent-color);
+  color: var(--accent-text);
+
+  border-color: var(--accent-color);
+}
+
+.pagination-button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.pagination-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+  margin-top: 24px;
+  padding: 40px 20px;
+
+  text-align: center;
+
+  background: var(--bg-secondary);
+
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+}
+
+.empty-state h3 {
+  margin-bottom: 10px;
+
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+/* =========================
+   Footer
+========================= */
 
 .app-footer {
   padding: 20px;
@@ -270,7 +541,18 @@
   font-size: 13px;
 }
 
-/* Basic responsive design */
+/* =========================
+   Temporary Responsive Layout
+========================= */
+
+@media (max-width: 900px) {
+  .evidence-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+}
 
 @media (max-width: 600px) {
   .app-header {
@@ -289,7 +571,8 @@
     padding: 20px;
   }
 
-  .exercise-grid {
+  .exercise-grid,
+  .evidence-grid {
     grid-template-columns: 1fr;
   }
 
@@ -297,5 +580,13 @@
   .state-panel,
   .tab-content {
     padding: 18px;
+  }
+
+  .pagination {
+    gap: 10px;
+  }
+
+  .pagination-button {
+    padding: 10px 12px;
   }
 }
