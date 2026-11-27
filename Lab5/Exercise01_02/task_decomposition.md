@@ -26,3 +26,28 @@ Task 1
     ├── Run development server
     ├── Verify production build
     └── Commit changes
+
+## Task 2 – Pure useReducer Implementation
+
+Task 2
+├── 2.1. Define application state
+│   ├── Define initial theme
+│   ├── Define initial active tab
+│   └── Define action types
+│
+├── 2.2. Implement pure reducer
+│   ├── Implement TOGGLE_THEME
+│   ├── Implement SET_ACTIVE_TAB
+│   ├── Handle unknown actions
+│   └── Ensure state immutability
+│
+├── 2.3. Integrate useReducer
+│   ├── Import appReducer
+│   ├── Initialize useReducer
+│   └── Display current application state
+│
+└── 2.4. Verification
+    ├── Verify initial state
+    ├── Verify state transitions
+    ├── Verify reducer purity
+    └── Commit changes
