@@ -1,11 +1,40 @@
+import { useReducer } from "react";
+
+import { appReducer } from "./reducers/appReducer.js";
+
+import {
+  initialState,
+  ACTION_TYPES,
+} from "./reducers/initialState.js";
+
 import "./App.css";
 
 function App() {
+  const [state, dispatch] = useReducer(
+    appReducer,
+    initialState
+  );
+
+  function handleToggleTheme() {
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_THEME,
+    });
+  }
+
+  function handleChangeTab(tab) {
+    dispatch({
+      type: ACTION_TYPES.SET_ACTIVE_TAB,
+      payload: tab,
+    });
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <div className="brand">
-          <span className="brand-label">UIT // S3T</span>
+          <span className="brand-label">
+            UIT // S3T
+          </span>
 
           <h1>Evidence Portal</h1>
 
@@ -18,40 +47,82 @@ function App() {
       <main className="app-content">
         <section className="welcome-card">
           <span className="section-label">
-            EXERCISES 0.1 & 0.2
+            EXERCISE 0.1
           </span>
 
-          <h2>React State Management & Responsive Design</h2>
+          <h2>Pure useReducer</h2>
 
           <p>
-            A React application demonstrating pure reducers,
-            split context, zero-effect pagination and
-            responsive container queries.
+            Centralized state management using a pure
+            reducer without side effects.
           </p>
 
           <div className="exercise-grid">
             <article className="exercise-card">
-              <span>EXERCISE 0.1</span>
+              <span>APPLICATION STATE</span>
 
-              <h3>Pure useReducer</h3>
+              <h3>Theme</h3>
 
               <p>
-                Centralized state management and
-                Split Context architecture.
+                Current theme:
+                <strong> {state.theme}</strong>
               </p>
+
+              <button
+                className="action-button"
+                onClick={handleToggleTheme}
+              >
+                Toggle Theme
+              </button>
             </article>
 
             <article className="exercise-card">
-              <span>EXERCISE 0.2</span>
+              <span>APPLICATION STATE</span>
 
-              <h3>Zero-Effect Pagination</h3>
+              <h3>Active Tab</h3>
 
               <p>
-                Derived pagination state and responsive
-                CSS Container Queries.
+                Current tab:
+                <strong> {state.activeTab}</strong>
               </p>
+
+              <div className="tab-actions">
+                <button
+                  className={`action-button ${
+                    state.activeTab === "reels"
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleChangeTab("reels")
+                  }
+                >
+                  Reels
+                </button>
+
+                <button
+                  className={`action-button ${
+                    state.activeTab === "evidence"
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleChangeTab("evidence")
+                  }
+                >
+                  Evidence
+                </button>
+              </div>
             </article>
           </div>
+
+          <section className="state-panel">
+            <h3>Current Application State</h3>
+
+            <pre>
+              {JSON.stringify(state, null, 2)}
+            </pre>
+          </section>
         </section>
       </main>
 
