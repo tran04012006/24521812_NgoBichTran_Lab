@@ -150,3 +150,38 @@ Task 5
     ├── Verify no pagination useEffect
     ├── Verify production build
     └── Commit changes
+# Task Decomposition
+
+## Task 6 – Responsive Container Queries
+
+Task 6
+├── 6.1. Implement container architecture
+│   ├── Configure app-content container
+│   ├── Configure evidence-container
+│   ├── Define container names
+│   └── Set container-type to inline-size
+│
+├── 6.2. Implement responsive layouts
+│   ├── Implement single-column evidence grid
+│   ├── Implement two-column evidence grid
+│   ├── Implement three-column evidence grid
+│   └── Replace grid media queries with container queries
+│
+├── 6.3. Improve viewport layout
+│   ├── Use 100dvh
+│   ├── Remove rigid height constraints
+│   └── Prevent horizontal overflow
+│
+├── 6.4. Improve interactive controls
+│   ├── Ensure minimum 44x44px touch targets
+│   ├── Implement responsive pagination
+│   └── Preserve keyboard focus indicators
+│
+└── 6.5. Verification
+    ├── Test narrow containers
+    ├── Test medium containers
+    ├── Test wide containers
+    ├── Verify dark and light themes
+    ├── Verify pagination functionality
+    ├── Verify production build
+    └── Commit changes

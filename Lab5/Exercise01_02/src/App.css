@@ -1,5 +1,10 @@
+/* =========================
+   Application Layout
+========================= */
+
 .app {
   min-height: 100dvh;
+
   display: flex;
   flex-direction: column;
 
@@ -16,12 +21,18 @@
   align-items: center;
   justify-content: space-between;
 
+  flex-wrap: wrap;
+
   gap: 20px;
   padding: 24px 6%;
 
   background: var(--bg-secondary);
 
   border-bottom: 1px solid var(--border-color);
+}
+
+.brand {
+  min-width: 0;
 }
 
 .brand-label {
@@ -33,7 +44,7 @@
 }
 
 .brand h1 {
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 28px);
   margin: 4px 0;
 }
 
@@ -53,11 +64,12 @@
 
   font-size: 12px;
   font-weight: 700;
+
   white-space: nowrap;
 }
 
 /* =========================
-   Main Content
+   Main Content Container
 ========================= */
 
 .app-content {
@@ -65,13 +77,22 @@
 
   width: 100%;
   max-width: 1200px;
+  min-width: 0;
 
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: clamp(16px, 4vw, 48px)
+           clamp(12px, 3vw, 24px);
+
+  /* Container Query */
+
+  container-type: inline-size;
+  container-name: app-content;
 }
 
 .welcome-card {
-  padding: 32px;
+  min-width: 0;
+
+  padding: 16px;
 
   background: var(--bg-secondary);
 
@@ -93,6 +114,8 @@
 .welcome-card h2 {
   font-size: clamp(24px, 4vw, 36px);
   margin: 12px 0;
+
+  overflow-wrap: anywhere;
 }
 
 .welcome-card > p {
@@ -107,17 +130,17 @@
 .exercise-grid {
   display: grid;
 
-  grid-template-columns: repeat(
-    2,
-    minmax(0, 1fr)
-  );
+  /* Mobile-first layout */
 
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 16px;
   margin-top: 32px;
 }
 
 .exercise-card {
-  padding: 24px;
+  min-width: 0;
+  padding: 18px;
 
   background: var(--bg-card);
 
@@ -196,7 +219,12 @@
 .tab-actions {
   display: flex;
   flex-wrap: wrap;
+
   gap: 12px;
+}
+
+.tab-actions .action-button {
+  flex: 1 1 auto;
 }
 
 /* =========================
@@ -204,8 +232,10 @@
 ========================= */
 
 .state-panel {
+  min-width: 0;
+
   margin-top: 28px;
-  padding: 24px;
+  padding: 18px;
 
   background: var(--bg-primary);
 
@@ -220,6 +250,8 @@
 
 .state-panel pre {
   margin: 0;
+  max-width: 100%;
+
   overflow-x: auto;
 
   color: var(--code-color);
@@ -234,8 +266,10 @@
 ========================= */
 
 .tab-content {
+  min-width: 0;
+
   margin-top: 28px;
-  padding: 24px;
+  padding: 16px;
 
   background: var(--bg-card);
 
@@ -260,15 +294,22 @@
 ========================= */
 
 .evidence-container {
+  width: 100%;
+  min-width: 0;
+
   margin-top: 28px;
+
+  /* Named Container */
+
+  container-type: inline-size;
+  container-name: evidence;
 }
 
 .evidence-toolbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
 
-  flex-wrap: wrap;
   gap: 12px;
 
   margin-bottom: 20px;
@@ -309,12 +350,11 @@
 .evidence-grid {
   display: grid;
 
-  grid-template-columns: repeat(
-    3,
-    minmax(0, 1fr)
-  );
+  /* Default: one column */
 
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 16px;
 }
 
 /* =========================
@@ -342,8 +382,7 @@
 
   border-color: var(--accent-color);
 
-  box-shadow:
-    0 8px 20px var(--shadow-color);
+  box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 .evidence-thumbnail {
@@ -352,6 +391,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+
+  /* Responsive thumbnail height */
 
   aspect-ratio: 16 / 9;
 
@@ -400,6 +443,7 @@
 }
 
 .evidence-card-body {
+  min-width: 0;
   padding: 16px;
 }
 
@@ -418,6 +462,8 @@
 
   color: var(--text-primary);
   font-size: 16px;
+
+  overflow-wrap: anywhere;
 }
 
 .evidence-card p {
@@ -425,6 +471,8 @@
 
   color: var(--text-secondary);
   font-size: 13px;
+
+  overflow-wrap: anywhere;
 }
 
 .clip-id {
@@ -432,6 +480,8 @@
 
   font-family: Consolas, monospace;
   font-size: 11px;
+
+  overflow-wrap: anywhere;
 }
 
 /* =========================
@@ -439,12 +489,16 @@
 ========================= */
 
 .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
 
-  flex-wrap: wrap;
-  gap: 16px;
+  grid-template-columns: repeat(
+    2,
+    minmax(0, 1fr)
+  );
+
+  align-items: center;
+
+  gap: 12px;
 
   margin-top: 28px;
   padding-top: 24px;
@@ -456,7 +510,7 @@
   min-width: 44px;
   min-height: 44px;
 
-  padding: 10px 18px;
+  padding: 10px 12px;
 
   background: var(--bg-button);
   color: var(--text-primary);
@@ -493,6 +547,11 @@
 }
 
 .page-indicator {
+  grid-column: 1 / -1;
+  grid-row: 1;
+
+  text-align: center;
+
   color: var(--text-secondary);
 
   font-size: 14px;
@@ -542,51 +601,83 @@
 }
 
 /* =========================
-   Temporary Responsive Layout
+   App Container Queries
 ========================= */
 
-@media (max-width: 900px) {
+@container app-content (min-width: 600px) {
+  .welcome-card {
+    padding: 32px;
+  }
+
+  .exercise-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+    gap: 20px;
+  }
+
+  .exercise-card {
+    padding: 24px;
+  }
+
+  .state-panel {
+    padding: 24px;
+  }
+
+  .tab-content {
+    padding: 24px;
+  }
+}
+
+/* =========================
+   Evidence Container Queries
+========================= */
+
+/* Medium container */
+
+@container evidence (min-width: 480px) {
   .evidence-grid {
     grid-template-columns: repeat(
       2,
       minmax(0, 1fr)
     );
   }
-}
 
-@media (max-width: 600px) {
-  .app-header {
-    padding: 20px;
-  }
-
-  .brand h1 {
-    font-size: 22px;
-  }
-
-  .app-content {
-    padding: 24px 16px;
-  }
-
-  .welcome-card {
-    padding: 20px;
-  }
-
-  .exercise-grid,
-  .evidence-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .exercise-card,
-  .state-panel,
-  .tab-content {
-    padding: 18px;
+  .evidence-toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .pagination {
-    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 16px;
   }
 
   .pagination-button {
-    padding: 10px 12px;
+    padding: 10px 18px;
+  }
+}
+
+/* Wide container */
+
+@container evidence (min-width: 760px) {
+  .evidence-grid {
+    grid-template-columns: repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+    gap: 20px;
+  }
+
+  .evidence-card-body {
+    padding: 20px;
   }
 }
