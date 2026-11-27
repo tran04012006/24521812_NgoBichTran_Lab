@@ -51,3 +51,34 @@ Task 2
     ├── Verify state transitions
     ├── Verify reducer purity
     └── Commit changes
+## Task 3 – Split Context Implementation
+
+Task 3
+├── 3.1. Create separate contexts
+│   ├── Create AppStateContext
+│   └── Create AppDispatchContext
+│
+├── 3.2. Implement AppProvider
+│   ├── Import appReducer
+│   ├── Import initialState
+│   ├── Initialize useReducer
+│   └── Implement nested context providers
+│
+├── 3.3. Create application components
+│   ├── Create Header
+│   ├── Create ThemeToggle
+│   ├── Create TabNavigation
+│   └── Create StatePreview
+│
+├── 3.4. Integrate Split Context
+│   ├── Wrap App with AppProvider
+│   ├── Remove useReducer from App.jsx
+│   ├── Connect state-reading components
+│   └── Connect dispatch-only components
+│
+└── 3.5. Verification
+    ├── Verify context state updates
+    ├── Verify dispatch actions
+    ├── Verify component separation
+    ├── Verify production build
+    └── Commit changes
