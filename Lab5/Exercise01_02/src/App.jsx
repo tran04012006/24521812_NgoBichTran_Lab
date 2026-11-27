@@ -1,48 +1,19 @@
-import { useReducer } from "react";
+import Header from "./components/Header.jsx";
 
-import { appReducer } from "./reducers/appReducer.js";
+import ThemeToggle from "./components/ThemeToggle.jsx";
 
-import {
-  initialState,
-  ACTION_TYPES,
-} from "./reducers/initialState.js";
+import TabNavigation from "./components/TabNavigation.jsx";
+
+import StatePreview from "./components/StatePreview.jsx";
+
+import StateValue from "./components/StateValue.jsx";
 
 import "./App.css";
 
 function App() {
-  const [state, dispatch] = useReducer(
-    appReducer,
-    initialState
-  );
-
-  function handleToggleTheme() {
-    dispatch({
-      type: ACTION_TYPES.TOGGLE_THEME,
-    });
-  }
-
-  function handleChangeTab(tab) {
-    dispatch({
-      type: ACTION_TYPES.SET_ACTIVE_TAB,
-      payload: tab,
-    });
-  }
-
   return (
     <div className="app">
-      <header className="app-header">
-        <div className="brand">
-          <span className="brand-label">
-            UIT // S3T
-          </span>
-
-          <h1>Evidence Portal</h1>
-
-          <p>Lab 5 — React State Management</p>
-        </div>
-
-        <span className="lab-label">LAB 05</span>
-      </header>
+      <Header />
 
       <main className="app-content">
         <section className="welcome-card">
@@ -50,11 +21,12 @@ function App() {
             EXERCISE 0.1
           </span>
 
-          <h2>Pure useReducer</h2>
+          <h2>Pure useReducer & Split Context</h2>
 
           <p>
             Centralized state management using a pure
-            reducer without side effects.
+            reducer and separate state and dispatch
+            contexts.
           </p>
 
           <div className="exercise-grid">
@@ -64,16 +36,11 @@ function App() {
               <h3>Theme</h3>
 
               <p>
-                Current theme:
-                <strong> {state.theme}</strong>
+                Current theme:{" "}
+                <StateValue name="theme" />
               </p>
 
-              <button
-                className="action-button"
-                onClick={handleToggleTheme}
-              >
-                Toggle Theme
-              </button>
+              <ThemeToggle />
             </article>
 
             <article className="exercise-card">
@@ -82,47 +49,15 @@ function App() {
               <h3>Active Tab</h3>
 
               <p>
-                Current tab:
-                <strong> {state.activeTab}</strong>
+                Current tab:{" "}
+                <StateValue name="activeTab" />
               </p>
 
-              <div className="tab-actions">
-                <button
-                  className={`action-button ${
-                    state.activeTab === "reels"
-                      ? "active"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleChangeTab("reels")
-                  }
-                >
-                  Reels
-                </button>
-
-                <button
-                  className={`action-button ${
-                    state.activeTab === "evidence"
-                      ? "active"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleChangeTab("evidence")
-                  }
-                >
-                  Evidence
-                </button>
-              </div>
+              <TabNavigation />
             </article>
           </div>
 
-          <section className="state-panel">
-            <h3>Current Application State</h3>
-
-            <pre>
-              {JSON.stringify(state, null, 2)}
-            </pre>
-          </section>
+          <StatePreview />
         </section>
       </main>
 
