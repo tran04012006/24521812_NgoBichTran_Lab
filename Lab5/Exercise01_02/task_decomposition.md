@@ -82,3 +82,33 @@ Task 3
     ├── Verify component separation
     ├── Verify production build
     └── Commit changes
+Task 4
+├── 4.1. Implement theme management
+│   ├── Read theme from AppStateContext
+│   ├── Create ThemeSync component
+│   ├── Synchronize theme using useEffect
+│   └── Keep reducer free of side effects
+│
+├── 4.2. Implement theme styling
+│   ├── Define dark theme CSS variables
+│   ├── Define light theme CSS variables
+│   ├── Replace hardcoded colors
+│   └── Style interactive components
+│
+├── 4.3. Implement active tab management
+│   ├── Read activeTab from AppStateContext
+│   ├── Create TabContent component
+│   ├── Render Reels content
+│   └── Render Evidence content
+│
+├── 4.4. Fix legacy bugs
+│   ├── Verify className attributes
+│   ├── Verify dataset.theme assignment
+│   └── Verify reducer purity
+│
+└── 4.5. Verification
+    ├── Test light and dark themes
+    ├── Test active tab switching
+    ├── Verify independent state transitions
+    ├── Verify lint and production build
+    └── Commit changes
