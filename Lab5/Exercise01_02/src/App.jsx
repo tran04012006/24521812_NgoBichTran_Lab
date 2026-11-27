@@ -8,6 +8,8 @@ import StatePreview from "./components/StatePreview.jsx";
 
 import StateValue from "./components/StateValue.jsx";
 
+import TabContent from "./components/TabContent.jsx";
+
 import "./App.css";
 
 function App() {
@@ -25,8 +27,9 @@ function App() {
 
           <p>
             Centralized state management using a pure
-            reducer and separate state and dispatch
-            contexts.
+            reducer, separate state and dispatch
+            contexts, and synchronized application
+            themes.
           </p>
 
           <div className="exercise-grid">
@@ -56,6 +59,8 @@ function App() {
               <TabNavigation />
             </article>
           </div>
+
+          <TabContent />
 
           <StatePreview />
         </section>
